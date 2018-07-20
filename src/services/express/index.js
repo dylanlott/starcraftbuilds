@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import { errorHandler as queryErrorHandler } from 'querymen'
 import { errorHandler as bodyErrorHandler } from 'bodymen'
 import { env } from '../../config'
+import list from 'express-list-endpoints'
 
 export default (apiRoot, routes) => {
   const app = express()
@@ -22,6 +23,10 @@ export default (apiRoot, routes) => {
   app.use(apiRoot, routes)
   app.use(queryErrorHandler())
   app.use(bodyErrorHandler())
+
+  app.get('/', function(req, res, next) {
+    res.status(200).json(list(app))
+  })
 
   return app
 }

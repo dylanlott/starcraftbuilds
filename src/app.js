@@ -7,7 +7,6 @@ import api from './api'
 const app = express(apiRoot, api)
 const server = http.createServer(app)
 
-console.log(`connecting to ${mongo.uri}`)
 mongoose.connect(mongo.uri)
 mongoose.Promise = Promise
 
