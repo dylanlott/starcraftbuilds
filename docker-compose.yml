@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  api:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+    links:
+      - mongo:mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/starcraftbuilds
+  mongo:
+    image: bitnami/mongodb
+    ports:
+      - "27017:27017"
